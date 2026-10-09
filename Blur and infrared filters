@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <string>
 #include "Image_Class.h"
 
 using namespace std;
@@ -44,28 +43,6 @@ void Blur(Image& image) {
             }
         }
     }
-}
-
-int main() {
-    string inputfilename, outputfilename;
-
-    cout << "Enter the input image filename: ";
-    cin >> inputfilename;
-
-    Image img(inputfilename);
-    Blur(img);
-    Blur(img);
-    Blur(img);
-    Blur(img);
-    Blur(img);
-
-    cout << "Enter the output image filename: ";
-    cin >> outputfilename;
-
-    img.saveImage(outputfilename);
-    cout << "Image blurred successfully!" << endl;
-
-    return 0;
 }
 
 void Infrared(Image& image) {
