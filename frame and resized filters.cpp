@@ -1,9 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include "Image_Class.h"
-
 using namespace std;
-
 void frame(Image& image)
 {
     int choice;
@@ -86,8 +84,7 @@ void frame(Image& image)
 }
 
 
-void Resize(Image& image)
-{
+void Resize(Image& image) {
     int newWidth, newHeight;
 
     cout << "Enter new width: ";
@@ -98,16 +95,13 @@ void Resize(Image& image)
 
     Image resized(newWidth, newHeight);
 
-    for (int x = 0; x < newWidth; x++)
-    {
-        for (int y = 0; y < newHeight; y++)
-        {
-            int old_x = x * image.width / newWidth;
-            int old_y = y * image.height / newHeight;
+    for (int i = 0; i < newWidth; i++) {
+        for (int j = 0; j < newHeight; j++) {
+            int old_i = i * image.width / newWidth;
+            int old_j = j * image.height / newHeight;
 
-            for (int k = 0; k < 3; k++)
-            {
-                resized(x, y, k) = image(old_x, old_y, k);
+            for (int k = 0; k < 3; k++) {
+                resized(i, j, k) = image(old_i, old_j, k);
             }
         }
     }
