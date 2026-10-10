@@ -84,7 +84,7 @@ void purple_night_effect(Image& image)
 				int new_color;
 				if (k == 0)
 				{
-					new_color = current_color + 30;
+					new_color = current_color + 50;
 				}
 				else if (k == 2)
 				{
@@ -98,6 +98,10 @@ void purple_night_effect(Image& image)
 				if (new_color > 255)
 				{
 					new_color = 255;
+				}
+				else if (new_color < 0)
+				{
+					new_color = 0;
 				}
 
 				image.setPixel(j, i, k, new_color);
