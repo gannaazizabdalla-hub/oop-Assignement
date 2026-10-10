@@ -2,61 +2,52 @@
 #include <iostream>
 #include "Image_Class.h"
 
-using namespace std;
-
 void Blur(Image& image) {
     Image blurred(image.width, image.height);
 
-    for (int j = 0; j < image.width; j++) {
-        for (int i = 0; i < image.height; i++) {
-            if (j == 0 || j == image.width - 1 || i == 0 || i == image.height - 1) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            if (i == 0 || i == image.width - 1 || j == 0 || j == image.height - 1) {
                 for (int k = 0; k < 3; k++) {
-                    blurred(j, i, k) = image(j, i, k);
+                    blurred(i, j, k) = image(i, j, k);
                 }
             }
             else {
                 for (int k = 0; k < 3; k++) {
                     int sum = 0;
 
-                    sum += image(j - 1, i - 1, k);
-                    sum += image(j, i - 1, k);
-                    sum += image(j + 1, i - 1, k);
+                    sum += image(i - 1, j - 1, k);
+                    sum += image(i, j - 1, k);
+                    sum += image(i + 1, j - 1, k);
 
-                    sum += image(j - 1, i, k);
-                    sum += image(j, i, k);
-                    sum += image(j + 1, i, k);
+                    sum += image(i - 1, j, k);
+                    sum += image(i, j, k);
+                    sum += image(i + 1, j, k);
 
-                    sum += image(j - 1, i + 1, k);
-                    sum += image(j, i + 1, k);
-                    sum += image(j + 1, i + 1, k);
+                    sum += image(i - 1, j + 1, k);
+                    sum += image(i, j + 1, k);
+                    sum += image(i + 1, j + 1, k);
 
-                    blurred(j, i, k) = sum / 9;
+                    blurred(i, j, k) = sum / 9;
                 }
             }
         }
     }
 
-    for (int j = 0; j < image.width; j++) {
-        for (int i = 0; i < image.height; i++) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
             for (int k = 0; k < 3; k++) {
-                image(j, i, k) = blurred(j, i, k);
+                image(i, j, k) = blurred(i, j, k);
             }
         }
     }
 }
-
 void Infrared(Image& image) {
-
-	for (int j = 0; j < image.width; j++) {
-		for (int i = 0;i < image.height; i++) {
-			image.setPixel(j, i, 0, 255);
-		    image.setPixel(j, i, 1, 255 - image.getPixel(j, i, 1));
-			image.setPixel(j, i, 2, 255 - image.getPixel(j, i, 2));
-
-		}
-	}
-
-
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            image.setPixel(i, j, 0, 255);
+            image.setPixel(i, j, 1, 255 - image.getPixel(i, j, 1));
+            image.setPixel(i, j, 2, 255 - image.getPixel(i, j, 2));
+        }
+    }
 }
-
-
